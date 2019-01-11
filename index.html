@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="taxi-app">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Taksi Iskvietimo Programa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="Styles/boostrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="Styles/main.css" />
+    <script src="Scripts/lodash.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/main.js"></script>
+</head>
+
+<body ng-controller="MainCtrl" class="container">
+    <div>
+        <h3 class="text-center">Iveskite Matricos dydi, ne mazesni nei 9x9.</h3>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-lg-2">
+            <label for="exampleInputEmail1">Eiluciu skaicius</label>
+            <input type="xasis" ng-model="xAxis" class="form-control " id="xasis" placeholder="eilute">
+        </div>
+        <div class="form-group col-lg-2">
+            <label for="yasis">Stulpeliu skaicius</label>
+            <input type="text" ng-model="yAxis" class="form-control" id="yasis" placeholder="stulpelis">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2">
+            <button type="button" ng-click="GenerateMatrix()" class="btn btn-primary">Sukurti</button>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <h3>Taxi duomenys</h3>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <div class="input-group"> <span class="input-group-addon"><i class="fa"></i></span>
+
+                    <input type="text" ng-model="taxiName" class="form-control" placeholder="Taxi vardas" />
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group"> <span class="input-group-addon"><i class="fa"></i></span>
+
+                    <input type="text" ng-model="tRow" class="form-control" placeholder="eilute" />
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group"> <span class="input-group-addon"><i class="fa"></i></span>
+
+                    <input type="text" ng-model="tColumn" class="form-control" placeholder="stulpelis" />
+                </div>
+            </div>
+            <button type="submit" ng-disabled="matrix.length == 0" ng-click="AddTaxi()" class="btn btn-default">Prideti Taxi</button>
+        </div>
+
+        <div>
+            <h3>Kliento duomenys</h3>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <div class="input-group"> <span class="input-group-addon"><i class="fa"></i></span>
+
+                    <input type="text" ng-model="clientName" class="form-control" placeholder="Kliento vardas" />
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group"> <span class="input-group-addon"><i class="fa"></i></span>
+
+                    <input type="text" ng-model="cRow" class="form-control" placeholder="eilute" />
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <div class="input-group"> <span class="input-group-addon"><i class="fa"></i></span>
+
+                    <input type="text" ng-model="cColumn" class="form-control" placeholder="stulpelis" />
+                </div>
+            </div>
+            <button type="submit" ng-click="FindTaxi()" class="btn btn-default">Surasti Taxi</button>
+        </div>
+    </div>
+    <div>
+        <h5>Klientai</h5>
+        <ul ng-repeat="c in clients">
+            <li>Vardas: {{c.Name}} - ID: {{c.Id}}
+        </ul>
+    </div>
+<hr>
+    <div>
+            <h5>Taxi</h5>
+            <ul ng-repeat="c in taxis">
+                <li>Vardas: {{c.Name}} ID: {{c.Id}} - Kliento ID: {{c.ClientId}}</li>
+            </ul>
+        </div>
+<br>
+<br>
+<br>
+    <table class="table" style="margin-top: 20px">
+        <tbody>
+            <tr ng-repeat="tr in matrix track by $index">
+                <td ng-repeat="td in tr track by $index">
+                   <span ng-if="!!td" ng-class="td.IsAvailable ? 'taxi-available' : 'taxi-taken'">{{td.Name}}-{{td.Type}}-{{td.Id}}</span> 
+                </td>
+        </tbody>
+
+</body>
+
+</html>

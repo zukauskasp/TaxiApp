@@ -1,0 +1,22 @@
+body {
+    margin-top: 20px
+}
+table {
+    table-layout:fixed;
+}
+td,th {
+    border-top-color: black !important;
+    border:solid thin !important;
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.taxi-taken {
+    color: red
+}
+
+.taxi-available{
+    color:green
+}
